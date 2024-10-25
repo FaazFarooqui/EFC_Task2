@@ -1,0 +1,35 @@
+<!-- templates/forecast.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sales Forecast</title>
+</head>
+<body>
+    <h1>Sales Forecast</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Generate Forecast</button>
+    </form>
+    
+    {% if historical_data_image %}
+        <h2>Historical Data Trends</h2>
+        <img src="data:image/png;base64,{{ historical_data_image }}" alt="Historical Data Trends">
+    {% endif %}
+    
+    {% if forecast_image %}
+        <h2>Forecasted Values with Confidence Intervals</h2>
+        <img src="data:image/png;base64,{{ forecast_image }}" alt="Forecast Plot">
+    {% endif %}
+    
+    {% if comparison_image %}
+        <h2>Comparison between Actual and Forecasted Values</h2>
+        <img src="data:image/png;base64,{{ comparison_image }}" alt="Comparison Plot">
+    {% endif %}
+    
+    {% if forecast_data %}
+        <h3>Forecast Data</h3>
+        {{ forecast_data|safe }}
+    {% endif %}
+</body>
+</html>
